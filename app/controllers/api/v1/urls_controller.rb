@@ -25,10 +25,6 @@ class Api::V1::UrlsController < ApiController
       render json: {error: "Unsupported content type"}, status: :unsupported_media_type
     end
   end
-
-  def decode
-
-  end
   
   def redirect
     short = params[:short]
