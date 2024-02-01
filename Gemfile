@@ -73,3 +73,8 @@ gem "devise", "~> 4.9"
 gem "simple_command", "~> 1.0"
 
 gem "simple_token_authentication", "~> 1.18"
+
+gem 'bootstrap', '~> 5.2', '>= 5.2.3'
+gem "sass-rails", "~> 6.0"
+
+gem "haml-rails", "~> 2.1"

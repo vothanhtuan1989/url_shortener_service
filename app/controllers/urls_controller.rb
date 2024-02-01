@@ -3,7 +3,7 @@ class UrlsController < ApplicationController
 
   # GET /urls or /urls.json
   def index
-    @urls = Url.all
+    @urls = current_user.urls
   end
 
   # GET /urls/1 or /urls/1.json

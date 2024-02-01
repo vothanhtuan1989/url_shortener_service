@@ -6,7 +6,7 @@ class Api::V1::UrlsController < ApiController
       original = params[:original]
       if valid_url?(original)
         short = encode_url(original)
-        url = current_user.urls.first_or_create!(
+        url = current_user.urls.create(
           original: original, short: short
         )
         render json: {short: "http://localhost:3000/#{url.short}"}, status: :created
@@ -19,7 +19,7 @@ class Api::V1::UrlsController < ApiController
   end
 
   def decode
-    
+
   end
   
   def redirect
