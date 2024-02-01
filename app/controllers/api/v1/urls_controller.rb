@@ -9,7 +9,7 @@ class Api::V1::UrlsController < ApiController
   end
 
   def shorten
-    # if request.content_type == "application/json"
+    if request.content_type == "application/json"
       cmd = ShortenUrlCommand.call(
         current_user: current_user,
         original: params[:original]
@@ -21,9 +21,9 @@ class Api::V1::UrlsController < ApiController
       else
         render json: {error: cmd.errors[:error]}, status: :bad_request
       end
-    # else
-    #   render json: {error: "Unsupported content type"}, status: :unsupported_media_type
-    # end
+    else
+      render json: {error: "Unsupported content type"}, status: :unsupported_media_type
+    end
   end
 
   def decode

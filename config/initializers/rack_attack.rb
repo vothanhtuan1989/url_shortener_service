@@ -6,7 +6,7 @@ class Rack::Attack
   end
   
   # Customize the response when a request is throttled
-  self.throttled_response = ->(env) {
+  self.throttled_responder = ->(env) {
     # Get the retry after value from the headers
     retry_after = (env['rack.attack.match_data'] || {})[:period]
     # Set the status code to 429 (Too Many Requests)
