@@ -20,10 +20,16 @@ class ShortenUrlCommand
   attr_reader :original, :current_user
 
   def valid_url?(url)
-    # uri = URI.parse(url)
-    # uri.is_a?(URI::HTTP) && !uri.host.nil? rescue URI::InvalidURIError
-    # false
-    true
+    uri = URI.parse(url)
+    if uri.is_a?(URI::HTTP) && !uri.host.nil?
+      true
+    else
+      errors.add(:error, 'Invilid URL')
+      false
+    end
+  rescue URI::InvalidURIError
+    errors.add(:error, 'Invilid URL')
+    false
   end
 
   def encode_url(url)

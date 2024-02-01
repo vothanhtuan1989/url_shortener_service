@@ -80,3 +80,8 @@ gem "sass-rails", "~> 6.0"
 gem "haml-rails", "~> 2.1"
 
 gem "kaminari", "~> 1.2"
+
+group :development, :test do
+  gem 'rspec-rails', '~> 6.1.0'
+  gem 'factory_bot_rails'
+end
