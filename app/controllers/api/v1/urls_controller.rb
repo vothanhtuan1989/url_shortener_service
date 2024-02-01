@@ -1,17 +1,26 @@
 class Api::V1::UrlsController < ApiController
   skip_before_action :authenticate, only: [:redirect]
 
+  def index
+    page = params[:page] || 1
+    @urls = current_user.urls.page(page).per(20)
+
+    render json: {urls: @urls}, status: :ok
+  end
+
   def shorten
     # if request.content_type == "application/json"
-      original = params[:original]
-      if valid_url?(original)
-        short = encode_url(original)
-        url = current_user.urls.create(
-          original: original, short: short
-        )
+
+      cmd = ShortenUrlCommand.call(
+        current_user: current_user,
+        original: params[:original]
+      )
+
+      if cmd.success?
+        url = cmd.result
         render json: {short: "http://localhost:3000/#{url.short}"}, status: :created
       else
-        render json: {error: "Invalid URL"}, status: :bad_request
+        render json: {error: cmd[:error]}, status: :bad_request
       end
     # else
     #   render json: {error: "Unsupported content type"}, status: :unsupported_media_type
@@ -31,17 +40,4 @@ class Api::V1::UrlsController < ApiController
       render json: {error: "Not found"}, status: :not_found
     end
   end
-  
-    private
-  
-    def valid_url?(url)
-      # uri = URI.parse(url)
-      # uri.is_a?(URI::HTTP) && !uri.host.nil? rescue URI::InvalidURIError
-      # false
-      true
-    end
-  
-    def encode_url(url)
-      url.hash.to_s(36)[0..5]
-    end
 end

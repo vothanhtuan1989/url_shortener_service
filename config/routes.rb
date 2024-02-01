@@ -18,7 +18,11 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      post "/shorten", to: "urls#shorten"
+      resources :urls, only: [:index] do
+        collection do
+          post :shorten
+        end
+      end
         
       resource :sessions, only: [:create, :destroy]
     end
