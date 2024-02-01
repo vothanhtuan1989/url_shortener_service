@@ -6,7 +6,9 @@ class Api::V1::UrlsController < ApiController
       original = params[:original]
       if valid_url?(original)
         short = encode_url(original)
-        url = Url.create(original: original, short: short)
+        url = current_user.urls.first_or_create!(
+          original: original, short: short
+        )
         render json: {short: "http://localhost:3000/#{url.short}"}, status: :created
       else
         render json: {error: "Invalid URL"}, status: :bad_request
@@ -14,6 +16,10 @@ class Api::V1::UrlsController < ApiController
     # else
     #   render json: {error: "Unsupported content type"}, status: :unsupported_media_type
     # end
+  end
+
+  def decode
+    
   end
   
   def redirect
