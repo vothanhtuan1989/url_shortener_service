@@ -78,3 +78,5 @@ gem 'bootstrap', '~> 5.2', '>= 5.2.3'
 gem "sass-rails", "~> 6.0"
 
 gem "haml-rails", "~> 2.1"
+
+gem "kaminari", "~> 1.2"
