@@ -6,7 +6,7 @@ RSpec.describe UrlService do
         let(:url) { 'https://www.example.com' }
 
         it 'returns true' do
-          expect(subject.valid_url?(url)).to be(true)
+          expect(UrlService.valid_url?(url)).to be(true)
         end
       end
 
@@ -14,7 +14,7 @@ RSpec.describe UrlService do
         let(:url) { 'invalid url' }
 
         it 'returns false' do
-          expect(subject.valid_url?(url)).to be(false)
+          expect(UrlService.valid_url?(url)).to be(false)
         end
       end
     end
@@ -23,17 +23,17 @@ RSpec.describe UrlService do
       let(:url) { 'https://www.example.com' }
 
       it 'returns a six-character string' do
-        expect(subject.encode_url(url)).to be_a(String)
-        expect(subject.encode_url(url).length).to eq(6)
+        expect(UrlService.encode_url(url)).to be_a(String)
+        expect(UrlService.encode_url(url).length).to eq(6)
       end
 
       it 'returns the same string for the same url' do
-        expect(subject.encode_url(url)).to eq(subject.encode_url(url))
+        expect(UrlService.encode_url(url)).to eq(UrlService.encode_url(url))
       end
 
       it 'returns a different string for a different url' do
         other_url = 'https://www.another.com'
-        expect(subject.encode_url(url)).not_to eq(subject.encode_url(other_url))
+        expect(UrlService.encode_url(url)).not_to eq(UrlService.encode_url(other_url))
       end
     end
   end

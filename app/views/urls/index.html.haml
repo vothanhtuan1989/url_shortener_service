@@ -1,14 +1,20 @@
-%table.table
-  %thead
-    %tr
-      %th No.
-      %th Original URL
-      %th Short URL
-  %tbody
-    - @urls.each_with_index do |url, index|
-      %tr
-        %td= index + 1
-        %td= url.original
-        %td= url.short
+.row
+  .col-md-8
+    %h3 List URLs
+    %table.table
+      %thead
+        %tr
+          %th Original URL
+          %th Short URL
+          %th Actions
+      %tbody{id: "list_urls"}
+        - @urls.each do |url|
+          = render "url", url: url
 
-= paginate @urls
+    = paginate @urls
+  .col-md-4
+    .card
+      .card-header
+        %h4 Shorten URL
+      .card-body
+        = render "form", url: Url.new

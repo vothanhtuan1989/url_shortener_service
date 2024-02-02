@@ -1,6 +1,5 @@
 class ShortenUrlCommand
   prepend SimpleCommand
-  include UrlService
 
   def initialize(current_user:, original:)
     @current_user = current_user
@@ -8,11 +7,16 @@ class ShortenUrlCommand
   end
 
   def call
-    if valid_url?(original)
-      short = encode_url(original)
-      url = current_user.urls.create!(
-        original: original, short: short
-      )
+    if UrlService.valid_url?(original)
+      short = UrlService.encode_url(original)
+      if Url.exists?(user_id: current_user.id, original: original)
+        errors.add(:error, 'Existed URL')
+        return false
+      else
+        url = current_user.urls.create!(
+          original: original, short: short
+        )
+      end
     else
       errors.add(:error, 'Invilid URL')
       return false

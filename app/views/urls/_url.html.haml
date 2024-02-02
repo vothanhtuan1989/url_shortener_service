@@ -1,0 +1,5 @@
+%tr{id: "#{dom_id url}"}
+  %td= url.original
+  %td= url.short
+  %td
+    = button_to "Remove", url_url(url), class: "btn btn-danger btn-sm", data: { turbo_stream: true }, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }

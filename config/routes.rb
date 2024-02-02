@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  resources :urls
-  get 'home/index'
-  # devise_for :users
   devise_for :users, controllers: {
     passwords: 'users/passwords',
     registrations: 'users/registrations',
@@ -14,8 +11,10 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  get "/:short", to: "api/v1/urls#redirect"
+  resources :urls, only: [:index, :create, :destroy]
+  get 'home/index'
 
+  get "/:short", to: "api/v1/urls#redirect"
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :urls, only: [:index] do
@@ -26,6 +25,8 @@ Rails.application.routes.draw do
       end
         
       resource :sessions, only: [:create, :destroy]
+
+      resource :registrations, only: [:create]
     end
   end
 

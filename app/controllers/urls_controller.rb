@@ -1,5 +1,5 @@
 class UrlsController < ApplicationController
-  before_action :set_url, only: %i[ show edit update destroy ]
+  before_action :set_url, only: %i[ destroy ]
 
   # GET /urls or /urls.json
   def index
@@ -7,43 +7,39 @@ class UrlsController < ApplicationController
     @urls = current_user.urls.page(page).per(20)
   end
 
-  # GET /urls/1 or /urls/1.json
-  def show
-  end
-
-  # GET /urls/new
-  def new
-    @url = Url.new
-  end
-
-  # GET /urls/1/edit
-  def edit
-  end
-
   # POST /urls or /urls.json
   def create
-    @url = Url.new(url_params)
+    cmd = ShortenUrlCommand.call(
+      current_user: current_user,
+      original: params[:url][:original]
+    )
 
     respond_to do |format|
-      if @url.save
-        format.html { redirect_to url_url(@url), notice: "Url was successfully created." }
-        format.json { render :show, status: :created, location: @url }
+      if cmd.success?
+        url = cmd.result
+        format.turbo_stream do
+          render turbo_stream: [
+              turbo_stream.prepend(
+                "list_urls",
+                partial: "urls/url",
+                locals: { url: url }
+              ),
+              turbo_stream.replace(
+                "form_url",
+                partial: "urls/form",
+                locals: { url: Url.new }
+              )
+            ]
+        end
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @url.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /urls/1 or /urls/1.json
-  def update
-    respond_to do |format|
-      if @url.update(url_params)
-        format.html { redirect_to url_url(@url), notice: "Url was successfully updated." }
-        format.json { render :show, status: :ok, location: @url }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @url.errors, status: :unprocessable_entity }
+        format.turbo_stream do
+          render turbo_stream: [
+              turbo_stream.replace(
+                "form_errors",
+                html: cmd.errors[:error][0]
+              )
+            ]
+        end
       end
     end
   end
@@ -54,7 +50,6 @@ class UrlsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to urls_url, notice: "Url was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 
