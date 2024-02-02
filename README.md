@@ -78,3 +78,38 @@ A shorten url service is a tool that allows you to create short and easy-to-reme
   --header 'X-User-Email: YOUR_EMAIL' \
   --header 'X-User-Token: YOUR_AUTHENTICATION_TOKEN'
 ```
+
+## How to run on your local machine
+### Requirements
+- Postgresql version 14
+- Ruby version 3.1.2
+- Rails version 7.1.3
+
+### Steps
+- Clone the code to your local machine.
+```command
+  git clone git@github.com:vothanhtuan1989/url_shortener_service.git
+```
+
+- Install dependencies with bundle install.
+```command
+  bundle install
+```
+
+- Set ENV variables on your local machine, and change some values as you wish and run it on terminal.
+```command
+  export DATABASE_ADAPTER=postgresql
+  export DATABASE_ENCODING=unicode
+  export DATABASE_NAME=url_shorten_service_development
+  export DATABASE_USERNAME=postgres
+  export DATABASE_PASSWORD=password
+  export DATABASE_HOST=localhost
+  export DATABASE_PORT=5432
+  export DATABASE_POOL=5
+  export BASE_URL=localhost:3000
+```
+
+- Run the server and enjoy the service.
+```command
+  rails server
+```
