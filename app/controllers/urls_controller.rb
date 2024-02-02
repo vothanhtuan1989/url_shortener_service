@@ -3,8 +3,14 @@ class UrlsController < ApplicationController
 
   # GET /urls or /urls.json
   def index
+    @urls = current_user.urls
+
+    if params[:query].present?
+      @urls = @urls.search(params[:query])
+    end
+
     page = params[:page] || 1
-    @urls = current_user.urls.page(page).per(20)
+    @urls = @urls.page(page).per(20)
   end
 
   # POST /urls or /urls.json

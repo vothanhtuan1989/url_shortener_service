@@ -1,17 +1,25 @@
 .row
   .col-md-8
-    %h3 List URLs
-    %table.table
-      %thead
-        %tr
-          %th Original URL
-          %th Short URL
-          %th Actions
-      %tbody{id: "list_urls"}
-        - @urls.each do |url|
-          = render "url", url: url
+    .row
+      .col-md-6
+        %h3 List URLs
+      .col-md-6
+        = form_with url: "", method: 'GET', html: { class: "search-form" }, data: { turbo_frame: "table", turbo_action: "advance" } do |f|
+          = f.search_field :query, placeholder: "Type something and press Enter...", value: params[:query], on: {enter: "this.form.requestSubmit()"}, class: 'form-control'
+    = turbo_frame_tag "table" do
+      %table.table
+        %thead
+          %tr
+            %th Original URL
+            %th Short URL
+            %th Actions
+        %tbody{id: "list_urls"}
+          - @urls.each do |url|
+            = render "url", url: url
 
-    = paginate @urls
+      - if @urls.length.positive?
+        .paging
+          = paginate @urls
   .col-md-4
     .card
       .card-header

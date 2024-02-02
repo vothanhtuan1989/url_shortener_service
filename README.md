@@ -19,15 +19,14 @@ A shorten url service is a tool that allows you to create short and easy-to-reme
   https://url-shorten.thanhtuan.tech/users/sign_in
 ```
 
-#### Step 3: shorten a URL
-```command
-  https://url-shorten.thanhtuan.tech/urls/new
-```
-
-#### Step 4: get original URL
+#### Step 3: visit url list
 ```command
   https://url-shorten.thanhtuan.tech/urls
 ```
+- To shorten a URL
+- To view all URLs
+- To search for a specific URL
+- To remove some unused URLs
 
 ### Use API
 #### Step 1: register a user
