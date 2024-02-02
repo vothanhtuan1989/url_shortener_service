@@ -79,7 +79,7 @@ A shorten url service is a tool that allows you to create short and easy-to-reme
   --header 'X-User-Token: YOUR_AUTHENTICATION_TOKEN'
 ```
 
-## How to run on your local machine
+## How to run on your local machine?
 ### Requirements
 - Postgresql version 14
 - Ruby version 3.1.2
@@ -107,6 +107,11 @@ A shorten url service is a tool that allows you to create short and easy-to-reme
   export DATABASE_PORT=5432
   export DATABASE_POOL=5
   export BASE_URL=localhost:3000
+```
+
+- Setup the database your local machine.
+```command
+  rails db:create db:migrate db:seed
 ```
 
 - Run the server and enjoy the service.

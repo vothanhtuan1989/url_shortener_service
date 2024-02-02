@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class UrlsController < ApplicationController
-  before_action :set_url, only: %i[ destroy ]
+  before_action :set_url, only: %i[destroy]
 
   # GET /urls or /urls.json
   def index

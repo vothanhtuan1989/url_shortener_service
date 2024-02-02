@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe UrlService do
   # Define a shared example group for testing the module methods
   shared_examples 'a url service' do

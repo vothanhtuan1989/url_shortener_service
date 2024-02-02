@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UrlService
   class << self
     def valid_url?(url)

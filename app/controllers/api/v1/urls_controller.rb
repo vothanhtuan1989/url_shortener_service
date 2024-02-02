@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::UrlsController < ApiController
   skip_before_action :authenticate, only: [:redirect]
 

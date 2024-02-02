@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe ShortenUrlCommand do
   let(:user) { create(:user) }
   let(:command) { described_class.new(current_user: user, original: original) }
