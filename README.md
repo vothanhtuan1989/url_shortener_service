@@ -30,41 +30,51 @@ A shorten url service is a tool that allows you to create short and easy-to-reme
 
 ### Use API
 #### Step 1: register a user
+- Please change YOUR_EMAIL and YOUR_PASSWORD to register a user.
+
 ```command
-  curl -i --location --request POST 'localhost:3000/api/v1/registrations' \
+  curl -i --location --request POST 'https://url-shorten.thanhtuan.tech/api/v1/registrations' \
   --header 'Content-Type: application/json' \
-  --data-raw '{ "user": { "email": "admin+1@shorten-url.com", "password": "skj**hJJJ666" }}'
+  --data-raw '{ "user": { "email": "YOUR_EMAIL", "password": "YOUR_PASSWORD" }}'
 ```
 
 #### Step 2: login to the system with your username and password
+- Copy YOUR_EMAIL and YOUR_PASSWORD in step 1 to login to the system and get authentication_token
+
 ```command
-  curl -i --location --request POST 'localhost:3000/api/v1/sessions' \
+  curl -i --location --request POST 'https://url-shorten.thanhtuan.tech/api/v1/sessions' \
   --header 'Content-Type: application/json' \
-  --data-raw '{ "email": "admin+1@shorten-url.com", "password": "skj**hJJJ666" }'
+  --data-raw '{ "email": "YOUR_EMAIL", "password": "YOUR_PASSWORD" }'
 ```
 
 #### Step 3: shorten a URL
+- Copy YOUR_EMAIL and YOUR_AUTHENTICATION_TOKEN response from step 2 and change YOUR_ORIGINAL_URL that you want to shorten
+
 ```command
-  curl -i --location --request POST 'localhost:3000/api/v1/urls/shorten' \
+  curl -i --location --request POST 'https://url-shorten.thanhtuan.tech/api/v1/urls/shorten' \
   --header 'Content-Type: application/json' \
-  --header 'X-User-Email: admin+1@shorten-url.com' \
-  --header 'X-User-Token: 4A6rty-5yyMVaYdWonuW' \
-  --data-raw '{ "original": "http://abc.com" }'
+  --header 'X-User-Email: YOUR_EMAIL' \
+  --header 'X-User-Token: YOUR_AUTHENTICATION_TOKEN' \
+  --data-raw '{ "original": "YOUR_ORIGINAL_URL" }'
 ```
 
 #### Step 4: get original URL
+- Copy YOUR_EMAIL and YOUR_AUTHENTICATION_TOKEN response from step 2 and change YOUR_SHORT_URL that you want to get original url
+
 ```command
-  curl -i --location --request GET 'localhost:3000/api/v1/urls/original_url' \
+  curl -i --location --request GET 'https://url-shorten.thanhtuan.tech/api/v1/urls/original_url' \
   --header 'Content-Type: application/json' \
-  --header 'X-User-Email: admin@shorten-url.com' \
-  --header 'X-User-Token: 4A6rty-5yyMVaYdWonuW' \
-  --data-raw '{ "short": "4euibv" }'
+  --header 'X-User-Email: YOUR_EMAIL' \
+  --header 'X-User-Token: YOUR_AUTHENTICATION_TOKEN' \
+  --data-raw '{ "short": "YOUR_SHORT_URL" }'
 ```
 
 #### Step 5: List URL
+- Copy YOUR_EMAIL and YOUR_AUTHENTICATION_TOKEN response from step 2 to get all your urls
+
 ```command
-  curl -i --location --request GET 'localhost:3000/api/v1/urls' \
+  curl -i --location --request GET 'https://url-shorten.thanhtuan.tech/api/v1/urls' \
   --header 'Content-Type: application/json' \
-  --header 'X-User-Email: admin+1@shorten-url.com' \
-  --header 'X-User-Token: 4A6rty-5yyMVaYdWonuW'
+  --header 'X-User-Email: YOUR_EMAIL' \
+  --header 'X-User-Token: YOUR_AUTHENTICATION_TOKEN'
 ```
