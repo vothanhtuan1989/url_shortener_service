@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       resources :urls, only: [:index] do
         collection do
           post :shorten
+          get :original_url
         end
       end
         

@@ -3,7 +3,7 @@ module UrlService
     uri = URI.parse(url)
     uri.is_a?(URI::HTTP) && !uri.host.nil?
   rescue URI::InvalidURIError
-    false
+    return false
   end
 
   def encode_url(url)

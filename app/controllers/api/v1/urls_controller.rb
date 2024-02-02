@@ -1,6 +1,8 @@
 class Api::V1::UrlsController < ApiController
   skip_before_action :authenticate, only: [:redirect]
 
+  before_action :set_url, only: [:original_url, :redirect]
+
   def index
     page = params[:page] || 1
     @urls = current_user.urls.page(page).per(20)
@@ -25,14 +27,31 @@ class Api::V1::UrlsController < ApiController
       render json: {error: "Unsupported content type"}, status: :unsupported_media_type
     end
   end
-  
-  def redirect
-    short = params[:short]
-    url = Url.find_by(short: short)
-    if url
-      redirect_to url.original, allow_other_host: true
+
+  def original_url
+    if @url.present?
+      render json: {original: @url.original},  
+             status: :ok
     else
-      render json: {error: "Not found"}, status: :not_found
+      render json: {error: "Not found"},
+             status: :not_found
     end
   end
+  
+  def redirect
+    if @url.present?
+      redirect_to url.original,
+                  allow_other_host: true
+    else
+      render json: {error: "Not found"},
+             status: :not_found
+    end
+  end
+
+  private
+
+    def set_url
+      short = params[:short]
+      @url = Url.find_by(short: short)
+    end
 end
