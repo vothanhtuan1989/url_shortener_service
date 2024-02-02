@@ -6,6 +6,6 @@ class ApiController < ActionController::API
   before_action :authenticate
 
   def authenticate
-    return head(:unauthorized) unless current_user
+    head(:unauthorized) unless current_user
   end
 end

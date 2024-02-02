@@ -20,7 +20,7 @@ module Api
       def shorten
         if request.content_type == 'application/json'
           cmd = ShortenUrlCommand.call(
-            current_user: current_user,
+            current_user:,
             original: params[:original]
           )
 
@@ -63,7 +63,7 @@ module Api
       def set_url
         short = params[:short]
         @url = Url.where(
-          short: short,
+          short:,
           user_id: current_user.id
         ).first
       end

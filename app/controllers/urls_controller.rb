@@ -7,9 +7,7 @@ class UrlsController < ApplicationController
   def index
     @urls = current_user.urls
 
-    if params[:query].present?
-      @urls = @urls.search(params[:query])
-    end
+    @urls = @urls.search(params[:query]) if params[:query].present?
 
     page = params[:page] || 1
     @urls = @urls.page(page).per(20)
@@ -18,7 +16,7 @@ class UrlsController < ApplicationController
   # POST /urls or /urls.json
   def create
     cmd = ShortenUrlCommand.call(
-      current_user: current_user,
+      current_user:,
       original: params[:url][:original]
     )
 
@@ -30,7 +28,7 @@ class UrlsController < ApplicationController
             turbo_stream.prepend(
               'list_urls',
               partial: 'urls/url',
-              locals: { url: url }
+              locals: { url: }
             ),
             turbo_stream.replace(
               'form_url',
@@ -70,6 +68,8 @@ class UrlsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def url_params
-    params.require(:url).permit(:original, :short, :user_id)
+    params.require(:url).permit(
+      :original, :short, :user_id
+    )
   end
 end

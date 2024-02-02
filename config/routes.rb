@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :users, controllers: {
     passwords: 'users/passwords',
@@ -11,22 +13,22 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  resources :urls, only: [:index, :create, :destroy]
+  resources :urls, only: %i[index create destroy]
   get 'home/index'
 
   get "/:short", to: "api/v1/urls#redirect"
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :urls, only: [:index] do
+      resources :urls, only: %i[index] do
         collection do
           post :shorten
           get :original_url
         end
       end
-        
-      resource :sessions, only: [:create, :destroy]
 
-      resource :registrations, only: [:create]
+      resource :sessions, only: %i[create destroy]
+
+      resource :registrations, only: %i[create]
     end
   end
 

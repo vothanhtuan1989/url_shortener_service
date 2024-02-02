@@ -2,7 +2,7 @@
 
 RSpec.describe ShortenUrlCommand do
   let(:user) { create(:user) }
-  let(:command) { described_class.new(current_user: user, original: original) }
+  let(:command) { described_class.new(current_user: user, original:) }
 
   describe '#call' do
     context 'when the original url is valid' do
@@ -34,7 +34,8 @@ RSpec.describe ShortenUrlCommand do
       end
 
       it 'does not create a url record in the database' do
-        expect { command.call }.not_to change { Url.count }
+        count = Url.count
+        expect { command.call }.not_to change{count}
       end
 
       it 'adds an error to the command object' do
