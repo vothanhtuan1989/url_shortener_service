@@ -30,7 +30,7 @@ A shorten url service is a tool that allows you to create short and easy-to-reme
 
 ### Use API
 #### Step 1: register a user
-- Please change YOUR_EMAIL and YOUR_PASSWORD to register a user.
+- To register a user, please provide YOUR_EMAIL and YOUR_PASSWORD.
 
 ```command
   curl -i --location --request POST 'https://url-shorten.thanhtuan.tech/api/v1/registrations' \
@@ -39,7 +39,7 @@ A shorten url service is a tool that allows you to create short and easy-to-reme
 ```
 
 #### Step 2: login to the system with your username and password
-- Copy YOUR_EMAIL and YOUR_PASSWORD in step 1 to login to the system and get authentication_token
+- To log in to the system and receive an authentication_token, copy YOUR_EMAIL and YOUR_PASSWORD from step 1.
 
 ```command
   curl -i --location --request POST 'https://url-shorten.thanhtuan.tech/api/v1/sessions' \
@@ -48,7 +48,7 @@ A shorten url service is a tool that allows you to create short and easy-to-reme
 ```
 
 #### Step 3: shorten a URL
-- Copy YOUR_EMAIL and YOUR_AUTHENTICATION_TOKEN response from step 2 and change YOUR_ORIGINAL_URL that you want to shorten
+- To shorten a URL, copy YOUR_EMAIL and YOUR_AUTHENTICATION_TOKEN from the response you get in step 2, and change YOUR_ORIGINAL_URL to the URL you want.
 
 ```command
   curl -i --location --request POST 'https://url-shorten.thanhtuan.tech/api/v1/urls/shorten' \
@@ -59,7 +59,7 @@ A shorten url service is a tool that allows you to create short and easy-to-reme
 ```
 
 #### Step 4: get original URL
-- Copy YOUR_EMAIL and YOUR_AUTHENTICATION_TOKEN response from step 2 and change YOUR_SHORT_URL that you want to get original url
+- To get the original URL, copy YOUR_EMAIL and YOUR_AUTHENTICATION_TOKEN from the response you get in step 2, and change YOUR_SHORT_URL to the short URL you want.
 
 ```command
   curl -i --location --request GET 'https://url-shorten.thanhtuan.tech/api/v1/urls/original_url' \
@@ -70,7 +70,7 @@ A shorten url service is a tool that allows you to create short and easy-to-reme
 ```
 
 #### Step 5: List URL
-- Copy YOUR_EMAIL and YOUR_AUTHENTICATION_TOKEN response from step 2 to get all your urls
+- To see all your URLs, copy YOUR_EMAIL and YOUR_AUTHENTICATION_TOKEN from the response in step 2.
 
 ```command
   curl -i --location --request GET 'https://url-shorten.thanhtuan.tech/api/v1/urls' \

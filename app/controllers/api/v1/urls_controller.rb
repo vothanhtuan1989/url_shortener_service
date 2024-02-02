@@ -5,7 +5,10 @@ class Api::V1::UrlsController < ApiController
 
   def index
     page = params[:page] || 1
-    @urls = current_user.urls.page(page).per(20)
+    @urls =
+      current_user.urls
+                  .page(page)
+                  .per(20)
 
     render :index, status: :ok
   end
@@ -19,7 +22,7 @@ class Api::V1::UrlsController < ApiController
 
       if cmd.success?
         url = cmd.result
-        render json: {short: "http://localhost:3000/#{url.short}"}, status: :created
+        render json: {short: "#{ENV["BASE_URL"]}/#{url.short}"}, status: :created
       else
         render json: {error: cmd.errors[:error]}, status: :bad_request
       end
@@ -52,6 +55,9 @@ class Api::V1::UrlsController < ApiController
 
     def set_url
       short = params[:short]
-      @url = Url.find_by(short: short)
+      @url = Url.find_by(
+        short: short,
+        user_id: current_user.id
+      )
     end
 end

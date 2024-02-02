@@ -4,8 +4,8 @@ development:
   database: url_shorten_service_development_0511
   pool: 5
   timeout: 5000
-  username: postgres
-  password: Password123
+  username: <%= ENV.fetch("DATABASE_USERNAME") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD") %>
 
 test:
   adapter: postgresql
@@ -13,8 +13,8 @@ test:
   database: url_shorten_service_test
   pool: 5
   timeout: 5000
-  username: postgres
-  password: Password123
+  username: <%= ENV.fetch("DATABASE_USERNAME") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD") %>
 
 production:
   adapter: <%= ENV.fetch("DATABASE_ADAPTER") %>
