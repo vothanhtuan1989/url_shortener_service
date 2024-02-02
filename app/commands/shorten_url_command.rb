@@ -15,7 +15,7 @@ class ShortenUrlCommand
         errors.add(:error, 'Existed URL')
         false
       else
-        url = current_user.urls.create!(
+        current_user.urls.create!(
           original: original, short: short
         )
       end

@@ -26,44 +26,47 @@ module Api
 
           if cmd.success?
             url = cmd.result
-            render json: { short: "#{ENV['BASE_URL']}/#{url.short}" }, status: :created
+            render json: { short: "#{ENV['BASE_URL']}/#{url.short}" },
+                   status: :created
           else
-            render json: { error: cmd.errors[:error] }, status: :bad_request
+            render json: { error: cmd.errors[:error] },
+                   status: :bad_request
           end
         else
-          render json: { error: 'Unsupported content type' }, status: :unsupported_media_type
+          render json: { error: 'Unsupported content type' },
+                 status: :unsupported_media_type
         end
       end
 
       def original_url
         if @url.present?
-          render json: { original: @url.original },  
-                status: :ok
+          render json: { original: @url.original },
+                 status: :ok
         else
           render json: { error: 'Not found' },
-                status: :not_found
+                 status: :not_found
         end
       end
-      
+
       def redirect
         if @url.present?
           redirect_to @url.original,
                       allow_other_host: true
         else
           render json: { error: 'Not found' },
-                status: :not_found
+                 status: :not_found
         end
       end
 
       private
 
-        def set_url
-          short = params[:short]
-          @url = Url.find_by(
-            short: short,
-            user_id: current_user.id
-          )
-        end
+      def set_url
+        short = params[:short]
+        @url = Url.where(
+          short: short,
+          user_id: current_user.id
+        ).first
+      end
     end
   end
 end

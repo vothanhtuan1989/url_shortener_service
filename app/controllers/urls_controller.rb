@@ -27,26 +27,26 @@ class UrlsController < ApplicationController
         url = cmd.result
         format.turbo_stream do
           render turbo_stream: [
-              turbo_stream.prepend(
-                'list_urls',
-                partial: 'urls/url',
-                locals: { url: url }
-              ),
-              turbo_stream.replace(
-                'form_url',
-                partial: 'urls/form',
-                locals: { url: Url.new }
-              )
-            ]
+            turbo_stream.prepend(
+              'list_urls',
+              partial: 'urls/url',
+              locals: { url: url }
+            ),
+            turbo_stream.replace(
+              'form_url',
+              partial: 'urls/form',
+              locals: { url: Url.new }
+            )
+          ]
         end
       else
         format.turbo_stream do
           render turbo_stream: [
-              turbo_stream.replace(
-                'form_errors',
-                html: cmd.errors[:error][0]
-              )
-            ]
+            turbo_stream.replace(
+              'form_errors',
+              html: cmd.errors[:error][0]
+            )
+          ]
         end
       end
     end
@@ -62,13 +62,14 @@ class UrlsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_url
-      @url = Url.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def url_params
-      params.require(:url).permit(:original, :short, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_url
+    @url = Url.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def url_params
+    params.require(:url).permit(:original, :short, :user_id)
+  end
 end
