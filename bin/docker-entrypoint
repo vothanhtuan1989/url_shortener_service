@@ -1,6 +1,6 @@
-# frozen_string_literal: true
-
 #!/bin/bash -e
+
+# frozen_string_literal: true
 
 # If running the rails server then create or migrate existing database
 if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then

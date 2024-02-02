@@ -33,11 +33,6 @@ RSpec.describe ShortenUrlCommand do
         expect(result).to be(false)
       end
 
-      it 'does not create a url record in the database' do
-        count = Url.count
-        expect { command.call }.not_to change{count}
-      end
-
       it 'adds an error to the command object' do
         command.call
         expect(command.errors).to include(:error)
