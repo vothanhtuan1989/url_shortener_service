@@ -2,7 +2,7 @@
   #form_errors
   = form_with(model: url) do |form|
     .form-group
-      = form.label :original, style: "display: block"
-      = form.text_field :original, class: "form-control"
+      = form.label :original, style: 'display: block'
+      = form.text_field :original, class: 'form-control'
     .form-group
-      = form.submit "Save", class: "btn btn-primary"
+      = form.submit 'Save', class: 'btn btn-primary'

@@ -13,7 +13,7 @@ class ShortenUrlCommand
       short = UrlService.encode_url(original)
       if Url.exists?(user_id: current_user.id, original: original)
         errors.add(:error, 'Existed URL')
-        return false
+        false
       else
         url = current_user.urls.create!(
           original: original, short: short
@@ -21,7 +21,7 @@ class ShortenUrlCommand
       end
     else
       errors.add(:error, 'Invilid URL')
-      return false
+      false
     end
   end
 

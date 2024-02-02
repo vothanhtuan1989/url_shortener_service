@@ -28,13 +28,13 @@ class UrlsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
               turbo_stream.prepend(
-                "list_urls",
-                partial: "urls/url",
+                'list_urls',
+                partial: 'urls/url',
                 locals: { url: url }
               ),
               turbo_stream.replace(
-                "form_url",
-                partial: "urls/form",
+                'form_url',
+                partial: 'urls/form',
                 locals: { url: Url.new }
               )
             ]
@@ -43,7 +43,7 @@ class UrlsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
               turbo_stream.replace(
-                "form_errors",
+                'form_errors',
                 html: cmd.errors[:error][0]
               )
             ]
@@ -57,7 +57,7 @@ class UrlsController < ApplicationController
     @url.destroy!
 
     respond_to do |format|
-      format.html { redirect_to urls_url, notice: "Url was successfully destroyed." }
+      format.html { redirect_to urls_url, notice: 'Url was successfully destroyed.' }
     end
   end
 
