@@ -7,7 +7,7 @@ class Api::V1::UrlsController < ApiController
     page = params[:page] || 1
     @urls = current_user.urls.page(page).per(20)
 
-    render json: {urls: @urls}, status: :ok
+    render :index, status: :ok
   end
 
   def shorten
@@ -40,7 +40,7 @@ class Api::V1::UrlsController < ApiController
   
   def redirect
     if @url.present?
-      redirect_to url.original,
+      redirect_to @url.original,
                   allow_other_host: true
     else
       render json: {error: "Not found"},

@@ -96,5 +96,5 @@ Rails.application.configure do
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
   config.hosts << "188.166.230.245"
-  config.hosts << "thanhtuan.tech"
+  config.hosts << "url-shorten.thanhtuan.tech"
 end
