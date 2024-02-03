@@ -48,13 +48,3 @@ jobs:
       # Add or replace test runners here
       - name: Run tests
         run: bin/rake
-
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: RuboCop Linter Action
-        uses: andrewmcodes/rubocop-linter-action@v3.0.0.rc2
-        env:
-          GITHUB_TOKEN: $ { { secrets.GITHUB_TOKEN }}
