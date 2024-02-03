@@ -94,3 +94,5 @@ gem 'rack-attack'
 gem 'rack-cors'
 
 gem 'pg_search'
+
+gem 'jquery-rails'
