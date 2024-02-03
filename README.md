@@ -119,3 +119,9 @@ A shorten url service is a tool that allows you to create short and easy-to-reme
   rails server
 ```
 
+## Real life problem
+- One concern is that the shortened url may not be unique, since different urls may have the same hash value or the same base 36 string. This could cause conflicts or errors when trying to access the original url from the shortened one. A possible solution is to use a database or a hash table to store the mapping between the original and the shortened urls, and check for duplicates before returning the shortened url. Alternatively, I could use a more complex hashing algorithm or a longer base 36 string to reduce the chances of collisions.
+
+- Another concern is that the shortened url may not be secure, since anyone who knows the base 36 string can access the original url. This could expose sensitive or private information that the user may not want to share. A possible solution is to add some encryption or authentication mechanism to the shortened url, such as a password, a token, or a salt. This way, only authorized users can access the original url from the shortened one.
+
+- A third concern is that the shortened url may not be user-friendly, since the base 36 string may not be easy to remember or type. This could affect the usability and convenience of the shortened url. A possible solution is to use a custom domain name or a word generator to create more meaningful and memorable shortened urls, such as bit.ly/ruby or tinyurl.com/awesome. This way, the user can associate the shortened url with the original one more easily.
