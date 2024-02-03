@@ -26,7 +26,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resource :sessions, only: %i[create destroy]
+      resource :sessions, only: %i[show create destroy]
 
       resource :registrations, only: %i[create]
     end
