@@ -69,7 +69,7 @@ A shorten url service is a tool that allows you to create short and easy-to-reme
   --data-raw '{ "short": "YOUR_SHORT_URL" }'
 ```
 
-#### Step 5: List URL
+#### Step 5: get list URLs
 - To see all your URLs, copy YOUR_EMAIL and YOUR_AUTHENTICATION_TOKEN from the response in step 2.
 
 ```command

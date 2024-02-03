@@ -5,7 +5,7 @@ module Api
     class UrlsController < ApiController
       skip_before_action :authenticate, only: [:redirect]
 
-      before_action :set_url, only: %i[original_url redirect]
+      before_action :set_url, only: %i[original_url]
 
       def index
         page = params[:page] || 1
@@ -49,6 +49,9 @@ module Api
       end
 
       def redirect
+        short = params[:short]
+        @url = Url.where(short:).first
+
         if @url.present?
           redirect_to @url.original,
                       allow_other_host: true
